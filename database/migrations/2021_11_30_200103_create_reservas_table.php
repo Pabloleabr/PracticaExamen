@@ -18,7 +18,7 @@ class CreateReservasTable extends Migration
             $table->id();
             $table->foreignId('usuario_id')->constrained('users')->unique();
             $table->foreignId('vuelo_id')->constrained('vuelos')->unique();
-            $table->integer(3);
+            $table->decimal('asiento',3,0);
             $table->timestamp('fecha_hora');
             $table->timestamps();
         });

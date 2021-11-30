@@ -21,8 +21,8 @@ class CreateVuelosTable extends Migration
             $table->foreignId('compania_id')->constrained('companias');
             $table->timestamp('salida');
             $table->timestamp('llegada');
-            $table->integer(3);
-            $table->decimal(8,2);
+            $table->decimal('asientos',3,0);
+            $table->decimal('precio',8,2);
             $table->timestamps();
         });
     }
