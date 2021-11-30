@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAuropuertosTable extends Migration
+class CreateAeropuertosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class CreateAuropuertosTable extends Migration
      */
     public function up()
     {
-        Schema::create('auropuertos', function (Blueprint $table) {
+        Schema::create('aeropuertos', function (Blueprint $table) {
             $table->id();
+            $table->string('codigo', 3)->unique();
+            $table->string('denominacion');
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ class CreateAuropuertosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('auropuertos');
+        Schema::dropIfExists('aeropuertos');
     }
 }
