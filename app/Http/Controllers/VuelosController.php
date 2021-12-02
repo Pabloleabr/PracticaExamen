@@ -13,9 +13,9 @@ class VuelosController extends Controller
         ->join('aeropuertos AS a', 'origen_id', '=', 'a.id')
         ->join('aeropuertos AS ae', 'destino_id', '=', 'ae.id')
         ->join('companias AS c', 'compania_id', '=', 'c.id')
-        ->select('v.*')
+        ->select('v.*', 'a.denominacion as origen', 'ae.denominacion as destino', 'c.denominacion as compania' )
         ->get();
-        dd($vuelos);
-        return view('index', ['vuelos' => $vuelos]);
+
+        return view('vuelos', ['vuelos' => $vuelos]);
     }
 }

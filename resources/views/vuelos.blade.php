@@ -8,42 +8,76 @@
 
                         <th class="px-6 py-2 text-xs text-gray-500">
                             <a href="">
-                                Denominación
+                                Codigo del vuelo
                             </a>
                         </th>
                         <th class="px-6 py-2 text-xs text-gray-500">
                             <a href="">
-                                Localidad
+                                origen
                             </a>
                         </th>
                         <th class="px-6 py-2 text-xs text-gray-500">
-                            Editar
+                                destino
                         </th>
                         <th class="px-6 py-2 text-xs text-gray-500">
-                            Borrar
+                                compañia
                         </th>
+                        <th class="px-6 py-2 text-xs text-gray-500">
+                            salida
+                        </th>
+                        <th class="px-6 py-2 text-xs text-gray-500">
+                                llegada
+                        </th>
+                        <th class="px-6 py-2 text-xs text-gray-500">
+                            asientos
+                        </th>
+                        <th class="px-6 py-2 text-xs text-gray-500">
+                            precio
+                    </th>
                     </tr>
                 </thead>
                 <tbody class="bg-white">
-                    @foreach ($departamentos as $depart)
+                    @foreach ($vuelos as $vuelo)
                         <tr class="whitespace-nowrap">
                             <td class="px-6 py-4">
                                 <div class="text-sm text-gray-900">
-                                    {{ $depart->denominacion }}
+                                    {{ $vuelo->codigo }}
                                 </div>
                             </td>
                             <td class="px-6 py-4">
                                 <div class="text-sm text-gray-900">
-                                    {{ $depart->localidad }}
+                                    {{ $vuelo->origen }}
                                 </div>
                             </td>
                             <td class="px-6 py-4">
-                                <a href="/depart/{{ $depart->id }}/edit"
-                                    class="px-4 py-1 text-sm text-white bg-blue-400 rounded">Editar</a>
+                                <div class="text-sm text-gray-900">
+                                    {{ $vuelo->destino }}
+                                </div>
                             </td>
                             <td class="px-6 py-4">
-                                <a href="#"
-                                    class="px-4 py-1 text-sm text-white bg-red-400 rounded">Borrar</a>
+                                <div class="text-sm text-gray-900">
+                                    {{ $vuelo->compania }}
+                                </div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="text-sm text-gray-900">
+                                    {{ $vuelo->salida }}
+                                </div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="text-sm text-gray-900">
+                                    {{ $vuelo->llegada }}
+                                </div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="text-sm text-gray-900">
+                                    {{ $vuelo->asientos }}
+                                </div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="text-sm text-gray-900">
+                                    {{ $vuelo->precio }}
+                                </div>
                             </td>
                         </tr>
                     @endforeach
