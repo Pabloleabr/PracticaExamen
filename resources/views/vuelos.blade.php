@@ -33,7 +33,10 @@
                         </th>
                         <th class="px-6 py-2 text-xs text-gray-500">
                             precio
-                    </th>
+                        </th>
+                        <th class="px-6 py-2 text-xs text-gray-500">
+                            reserva
+                        </th>
                     </tr>
                 </thead>
                 <tbody class="bg-white">
@@ -79,9 +82,21 @@
                                     {{ $vuelo->precio }}
                                 </div>
                             </td>
+                            <td class="px-6 py-4">
+                                <div class="text-sm text-gray-900">
+                                    <form action="vuelos/{{$vuelo->id}}" method="POST">
+                                        @csrf
+                                        <input type="submit" value="Reservar">
+                                    </form>
+                                </div>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
+        </div>
+        <div class="flex items-center">
+            {{ $vuelos->links() }}
+
         </div>
 </x-layout>

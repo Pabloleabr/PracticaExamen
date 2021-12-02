@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ReservasController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VuelosController;
 use Illuminate\Support\Facades\Route;
@@ -24,4 +25,7 @@ Route::post('login', [UserController::class, 'login']);
 Route::post('logout', [UserController::class, 'logout']);
 
 Route::get('vuelos', [VuelosController::class, 'index']);
+
+Route::post('vuelos/id', [ReservasController::class, 'reservar']);
+
 
