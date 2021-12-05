@@ -26,6 +26,8 @@ Route::post('logout', [UserController::class, 'logout']);
 
 Route::get('vuelos', [VuelosController::class, 'index']);
 
-Route::post('vuelos/id', [ReservasController::class, 'reservar']);
+Route::get('reservas', [ReservasController::class, 'reservas']);
+Route::get('reservas/{id}', [ReservasController::class, 'show']);
+Route::post('vuelos/{id}', [ReservasController::class, 'reservar']);
 
 

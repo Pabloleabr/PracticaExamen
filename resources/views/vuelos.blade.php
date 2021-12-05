@@ -86,6 +86,22 @@
                                 <div class="text-sm text-gray-900">
                                     <form action="vuelos/{{$vuelo->id}}" method="POST">
                                         @csrf
+                                        <label for="asiento">nº asiento</label>
+                                        <select name="asiento" id="asiento">
+                                            @php
+
+                                                //preguntar sobre la tala reservas y como seria ya que el vuelo id es unique
+                                                $reservados = Illuminate\Support\Facades\DB::table('reservas')
+                                                ->where('vuelo_id','=',"$vuelo->id")
+                                                ->select('asiento')->get();
+
+                                            @endphp
+                                            @for ($x = 1;$x <= $vuelo->asientos;$x++)
+                                           {{--      @if ()
+
+                                                @endif --}}
+                                            @endfor
+                                        </select>
                                         <input type="submit" value="Reservar">
                                     </form>
                                 </div>
