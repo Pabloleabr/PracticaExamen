@@ -29,5 +29,6 @@ Route::get('vuelos', [VuelosController::class, 'index']);
 Route::get('reservas', [ReservasController::class, 'reservas']);
 Route::get('reservas/{id}', [ReservasController::class, 'show']);
 Route::post('vuelos/{id}', [ReservasController::class, 'reservar']);
+Route::delete('reservas/{id}', [ReservasController::class, 'borrar']);
 
 

@@ -38,9 +38,10 @@ class ReservasController extends Controller
         $reservas = DB::table('reservas','r')
         ->join('vuelos as v', 'r.vuelo_id', '=', 'v.id')
         ->where('usuario_id','=', $this->getCurrentUserid())
+        ->select('r.*','codigo','salida','precio','v.id as v_id')
         ->get();
 
-        return view('reservas', [
+        return view('reservas.reservas', [
             'reservas'=> $reservas
         ]);
     }
@@ -61,9 +62,18 @@ class ReservasController extends Controller
         ->select('r.*','v.*', 'a.denominacion as origen', 'ae.denominacion as destino', 'c.denominacion as compania' )
         ->get();
 
-        return view('show',[
+        return view('reservas.show',[
             'reservas' => $reservas
         ]);
+    }
+
+    public function borrar($id)
+    {
+        $reservas = DB::table('reservas')->where('id', '=', $id)->get();
+        abort_unless($reservas,404);
+        DB::table('reservas')->where('id', '=', $id)->delete();
+
+        return redirect()->back()->with('success', 'reserva borrada correctamente');
     }
 
     private function getCurrentUserid()

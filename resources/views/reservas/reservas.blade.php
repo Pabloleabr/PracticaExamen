@@ -24,7 +24,10 @@
                         </th>
                         <th class="px-6 py-2 text-xs text-gray-500">
                             Más información
-                    </th>
+                        </th>
+                        <th class="px-6 py-2 text-xs text-gray-500">
+                            borrar
+                        </th>
                     </tr>
                 </thead>
                 <tbody class="bg-white">
@@ -52,13 +55,21 @@
                             </td>
                             <td class="px-6 py-4">
                                 <div class="text-sm text-gray-900">
-                                    <form action="reservas/{{ $reserva->id }}" method="GET">
+                                    <form action="reservas/{{ $reserva->v_id }}" method="GET">
                                     <input type="hidden" name="asiento" value="{{$reserva->asiento}}">
                                     <input type="submit" value="-->">
                                     </form>
                                 </div>
                             </td>
-
+                            <td class="px-6 py-4">
+                                <div class="text-sm text-gray-900">
+                                    <form action="reservas/{{$reserva->id}}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <input type="submit" value="BORRAR">
+                                    </form>
+                                </div>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
