@@ -1,6 +1,6 @@
 <x-layout>
     <div class="flex flex-col items-center mt-4">
-    <h1 class="mb-4 text-2xl font-semibold">Vuelos</h1>
+    <h1 class="mb-4 text-2xl font-semibold">Reservas</h1>
         <div class="border border-gray-200 shadow">
             <table>
                 <thead class="bg-gray-50">
@@ -21,6 +21,9 @@
                         </th>
                         <th class="px-6 py-2 text-xs text-gray-500">
                             precio
+                        </th>
+                        <th class="px-6 py-2 text-xs text-gray-500">
+                            Más información
                     </th>
                     </tr>
                 </thead>
@@ -45,6 +48,14 @@
                             <td class="px-6 py-4">
                                 <div class="text-sm text-gray-900">
                                     {{ $reserva->precio }}
+                                </div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="text-sm text-gray-900">
+                                    <form action="reservas/{{ $reserva->id }}" method="GET">
+                                    <input type="hidden" name="asiento" value="{{$reserva->asiento}}">
+                                    <input type="submit" value="-->">
+                                    </form>
                                 </div>
                             </td>
 

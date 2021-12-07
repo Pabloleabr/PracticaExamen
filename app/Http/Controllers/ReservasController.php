@@ -14,7 +14,7 @@ class ReservasController extends Controller
 
 
         $validados = request()->validate([
-            'asiento' => 'require|integer',
+            'asiento' => 'required|integer',
         ]);
         $fecha = new DateTime();
 
@@ -40,9 +40,21 @@ class ReservasController extends Controller
         ]);
     }
 
-    public function show()
+    public function show($id)
     {
-        $reservas = 1;
+        $validados = request()->validate([
+            'asiento' => 'required|integer',
+        ]);
+
+        $reservas = DB::table('reservas','r')
+        ->join('vuelos as v', 'r.vuelo_id', '=', 'v.id')
+        ->join('aeropuertos AS a', 'origen_id', '=', 'a.id')
+        ->join('aeropuertos AS ae', 'destino_id', '=', 'ae.id')
+        ->join('companias AS c', 'compania_id', '=', 'c.id')
+        ->where('v.id','=', $id)
+        ->where('r.asiento','=',$validados['asiento'])
+        ->select('r.*','v.*', 'a.denominacion as origen', 'ae.denominacion as destino', 'c.denominacion as compania' )
+        ->get();
 
         return view('show',[
             'reservas' => $reservas

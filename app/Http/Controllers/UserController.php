@@ -37,7 +37,7 @@ class UserController extends Controller
     public function logout()
     {
         session()->forget('usuario');
-        return redirect()->back()->with('success', 'has hecho logout correctamente');
+        return redirect('/')->with('success', 'has hecho logout correctamente');
     }
 
     public static function logueado()
