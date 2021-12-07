@@ -72,7 +72,7 @@ class ReservasController extends Controller
         return $user[0]->id;
     }
 
-    static function asientosOcupados($id)
+    public static function asientosOcupados($id)
     {
         $reservados = DB::table('vuelos', 'v')
         ->join('reservas AS r', 'v.id', '=', 'r.vuelo_id')

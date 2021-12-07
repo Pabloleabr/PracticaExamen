@@ -13,12 +13,7 @@ class VuelosController extends Controller
         ->join('aeropuertos AS a', 'origen_id', '=', 'a.id')
         ->join('aeropuertos AS ae', 'destino_id', '=', 'ae.id')
         ->join('companias AS c', 'compania_id', '=', 'c.id')
-        ->select('v.*', 'a.denominacion as origen', 'ae.denominacion as destino', 'c.denominacion as compania' )
-        ;
-        $reservados = DB::table('vuelos', 'v')
-        ->join('reservas AS r', 'v.id', '=', 'r.vuelo_id')
-        ->select('v.id', 'r.asiento')
-        ->get();
+        ->select('v.*', 'a.denominacion as origen', 'ae.denominacion as destino', 'c.denominacion as compania' );
 
         $paginador = $vuelos->paginate(2);
         /* $paginador->appends(compact(
@@ -33,7 +28,6 @@ class VuelosController extends Controller
         )); */
         return view('vuelos', [
             'vuelos' => $paginador,
-            'reservados' => $reservados
         ]);
     }
 }

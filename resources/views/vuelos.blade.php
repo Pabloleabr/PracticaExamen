@@ -84,12 +84,7 @@
                             </td>
                             @php
                                 //cambiar para que use el pmetodo de la clase reservar asientosOcupados($id)
-                                $reservado = [];
-                                foreach ($reservados as $reserva) {
-                                    if ($reserva->id == $vuelo->id) {
-                                        array_push($reservado, $reserva->asiento);
-                                    }
-                                }
+                                $reservado = App\Http\Controllers\ReservasController::asientosOcupados($vuelo->id);
 
                             @endphp
                             <td class="px-6 py-4">
