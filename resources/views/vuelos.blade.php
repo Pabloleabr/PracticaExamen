@@ -82,24 +82,26 @@
                                     {{ $vuelo->precio }}
                                 </div>
                             </td>
+                            @php
+                                //cambiar para que use el pmetodo de la clase reservar asientosOcupados($id)
+                                $reservado = [];
+                                foreach ($reservados as $reserva) {
+                                    if ($reserva->id == $vuelo->id) {
+                                        array_push($reservado, $reserva->asiento);
+                                    }
+                                }
+
+                            @endphp
                             <td class="px-6 py-4">
                                 <div class="text-sm text-gray-900">
                                     <form action="vuelos/{{$vuelo->id}}" method="POST">
                                         @csrf
                                         <label for="asiento">nº asiento</label>
                                         <select name="asiento" id="asiento">
-                                            @php
-
-                                                //preguntar sobre la tala reservas y como seria ya que el vuelo id es unique
-                                                $reservados = Illuminate\Support\Facades\DB::table('reservas')
-                                                ->where('vuelo_id','=',"$vuelo->id")
-                                                ->select('asiento')->get();
-
-                                            @endphp
                                             @for ($x = 1;$x <= $vuelo->asientos;$x++)
-                                           {{--      @if ()
-
-                                                @endif --}}
+                                                @if (!in_array($x, $reservado))
+                                                    <option value="{{$x}}">{{$x}}</option>
+                                                @endif
                                             @endfor
                                         </select>
                                         <input type="submit" value="Reservar">

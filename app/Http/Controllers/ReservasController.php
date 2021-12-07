@@ -18,14 +18,19 @@ class ReservasController extends Controller
         ]);
         $fecha = new DateTime();
 
+        if(in_array($validados['asiento'], $this->asientosOcupados($id)) ){
+            return redirect()->back()->with('error', 'asiento introducido ya esta ocupado');
+        }
+
         DB::table('reservas')->insert([
-            'usuario_id' => $user[0]->id,
+            'usuario_id' => $user,
             'vuelo_id' => $id,
             'asiento' => $validados['asiento'],
             'fecha_hora' => $fecha->format('d-m-Y H:i:s')
         ]);
 
         return redirect()->back()->with('success','reserva hecha con existo');
+
     }
 
     public function reservas()
@@ -65,5 +70,21 @@ class ReservasController extends Controller
     {
         $user = DB::table('users')->where('email','=',session('usuario'))->select('id')->get();
         return $user[0]->id;
+    }
+
+    static function asientosOcupados($id)
+    {
+        $reservados = DB::table('vuelos', 'v')
+        ->join('reservas AS r', 'v.id', '=', 'r.vuelo_id')
+        ->select('v.id', 'r.asiento')
+        ->get();
+        $reservado = [];
+
+        foreach ($reservados as $reserva) {
+            if ($reserva->id == $id) {
+                array_push($reservado, $reserva->asiento);
+            }
+        }
+        return $reservado;
     }
 }
