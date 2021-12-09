@@ -26,6 +26,7 @@
                     @else
                     <a class="hover:text-blue-500 hover:underline" href="/login">login</a>
                     @endif
+                    | <a href="vuelos">vuelos</a>
                 </nav>
             </header>
 

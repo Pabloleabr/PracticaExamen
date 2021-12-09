@@ -10,17 +10,15 @@ class ReservasController extends Controller
 {
     public function reservar($id){
 
+        if(!session()->has('usuario')){
+            return redirect('/')->with('error','tienes que estar logeado');
+        }
         $user = $this->getCurrentUserid();
-
 
         $validados = request()->validate([
             'asiento' => 'required|integer',
         ]);
         $fecha = new DateTime();
-
-        if(in_array($validados['asiento'], $this->asientosOcupados($id)) ){
-            return redirect()->back()->with('error', 'asiento introducido ya esta ocupado');
-        }
 
         DB::table('reservas')->insert([
             'usuario_id' => $user,
@@ -35,9 +33,13 @@ class ReservasController extends Controller
 
     public function reservas()
     {
+        if(!session()->has('usuario')){
+            return redirect('/')->with('error','tienes que estar logeado');
+        }
+        $user = $this->getCurrentUserid();
         $reservas = DB::table('reservas','r')
         ->join('vuelos as v', 'r.vuelo_id', '=', 'v.id')
-        ->where('usuario_id','=', $this->getCurrentUserid())
+        ->where('usuario_id','=', $user)
         ->select('r.*','codigo','salida','precio','v.id as v_id')
         ->get();
 
@@ -78,6 +80,7 @@ class ReservasController extends Controller
 
     private function getCurrentUserid()
     {
+
         $user = DB::table('users')->where('email','=',session('usuario'))->select('id')->get();
         return $user[0]->id;
     }
