@@ -8,11 +8,22 @@ use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
+    /**
+     * loginForm
+     * te muestra la vista login
+     * @return void
+     */
     public function loginForm()
     {
         return view('login');
     }
 
+    /**
+     * login
+     * valida los datos del login y compruean si existen en la base de datos
+     * para loguearte
+     * @return void
+     */
     public function login()
     {
         $validados = request()->validate([
@@ -34,12 +45,24 @@ class UserController extends Controller
         return redirect()->back()->with('error', 'Usuario o contraseña incorrectos.');
     }
 
+    /**
+     * logout
+     * te desloguea si estas logueado
+     * @return void
+     */
     public function logout()
     {
-        session()->forget('usuario');
-        return redirect()->back()->with('success', 'has hecho logout correctamente');
+        if($this->logueado()) {
+            session()->forget('usuario');
+        }
+        return redirect('/')->with('success', 'has hecho logout correctamente');
     }
 
+    /**
+     * logueado
+     * comprueba si estas logueado
+     * @return bool
+     */
     public static function logueado()
     {
         return request()->session()->has('usuario');
