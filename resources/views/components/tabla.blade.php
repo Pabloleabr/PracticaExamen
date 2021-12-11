@@ -4,7 +4,7 @@
         <table>
             <thead class="bg-gray-50">
                 <tr>
-                    @foreach ($titulos as $href=>$titulo)
+                    @foreach ($titulos as $titulo=>$href)
                     <th class="px-6 py-2 text-xs text-gray-500">
                         <a href="{!!$href!!}">
                             {{$titulo}}

@@ -1,8 +1,15 @@
 
+@php
+    $titulos = array_keys($datos[0]);
+    $tit = [];
+    foreach ($titulos as $value) {
+        $tit[$value] ='#';
+    }
+@endphp
 
 <x-tabla
 :enunciado="$enunciado"
-:titulos="array_keys($datos[0])">
+:titulos="$tit">
 
 @foreach ($datos as $dato)
     <tr class="whitespace-nowrap">

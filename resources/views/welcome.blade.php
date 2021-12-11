@@ -5,10 +5,11 @@
     @endphp
     <x-tabla
     :enunciado="'titulo'"
-    :titulos="[$orden . 'campo1' . $link=>'titulo1',$orden . 'campo2' . $link=>'titulo2']">
+    :titulos="['titulo1'=>$orden . 'campo1' . $link, 'titulo2'=>$orden . 'campo2' . $link,
+    'titulo3'=>'#']">
 
     </x-tabla>
-{{--     <x-tablaBasica
+   {{--  <x-tablaBasica
     :enunciado="'titulo'"
     :datos="[['titulo1'=>1,'titulo2'=>2]]">
 
