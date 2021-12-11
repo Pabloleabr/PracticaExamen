@@ -1,8 +1,7 @@
 <x-layout>
-    <x-tabla
+    <x-tablaBasica
     :enunciado="'titulo'"
-    :titulos="['titulo1','titulo2']">
-        <x-cuerpoBasico :datos="[[1,2],['uno','dos']]"/>
+    :datos="[['titulo1'=>1,'titulo2'=>2]]">
 
-    </x-tabla>
+    </x-tablaBasica>
 </x-layout>

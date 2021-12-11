@@ -1,3 +1,9 @@
+
+
+<x-tabla
+:enunciado="$enunciado"
+:titulos="array_keys($datos[0])">
+
 @foreach ($datos as $dato)
     <tr class="whitespace-nowrap">
         @foreach ($dato as $elemento)
@@ -9,3 +15,5 @@
         @endforeach
     </tr>
 @endforeach
+
+</x-tabla>
