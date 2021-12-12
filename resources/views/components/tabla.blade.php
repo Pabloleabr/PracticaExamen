@@ -18,9 +18,4 @@
             </tbody>
         </table>
     </div>
-    <div class="flex items-center">
-        @if (isset($paginado))
-        {{ $vuelos->links() }}
-        @endif
 
-    </div>
