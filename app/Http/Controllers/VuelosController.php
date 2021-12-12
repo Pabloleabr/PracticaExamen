@@ -9,14 +9,17 @@ class VuelosController extends Controller
 {
     public function index()
     {
-        $orden = request()->query('orden') ?: 'codigo';
 
         $vuelos = DB::table('vuelos', 'v')
         ->join('aeropuertos AS ae', 'origen_id', '=', 'ae.id')
         ->join('aeropuertos AS a', 'destino_id', '=', 'a.id')
         ->join('companias AS c', 'compania_id', '=', 'c.id')
         ->select('v.codigo','ae.denominacion AS origen', 'a.denominacion AS destino', 'c.denominacion AS compania'
-                , 'v.salida', 'asientos', 'precio');
+        , 'v.salida', 'asientos', 'precio');
+
+        $orden = request()->query('orden') ?: 'codigo';
+        //compruebo si existe en los titulos de la tabla
+        abort_unless(in_array($orden, array_keys((array)($vuelos->get())[0])), 404);
 
         $vuelos->orderBy($orden);
 
