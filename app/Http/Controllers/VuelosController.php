@@ -15,7 +15,8 @@ class VuelosController extends Controller
         ->join('aeropuertos AS ae', 'origen_id', '=', 'ae.id')
         ->join('aeropuertos AS a', 'destino_id', '=', 'a.id')
         ->join('companias AS c', 'compania_id', '=', 'c.id')
-        ->select('v.*','ae.denominacion AS origen', 'a.denominacion AS destino', 'c.denominacion AS compania');
+        ->select('v.codigo','ae.denominacion AS origen', 'a.denominacion AS destino', 'c.denominacion AS compania'
+                , 'v.salida', 'asientos', 'precio');
 
         $vuelos->orderBy($orden);
 

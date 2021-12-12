@@ -1,14 +1,14 @@
 <x-layout>
     @php
-        $link = e("&codio=" . old('codigo') . "&origen=" . old('origen') . "&destino=" . old('destino')
-        . "&compania=" . old('compania') . "&salida=" . old('salida') . "&asientos=" . old('asientos')
-        . "&precio=" . old('precio'));
-        $orden= '/?orden=';
-
-        $titulos= ['codigo'=>$orden . 'codigo' . $link, 'origen'=>$orden . 'origen' . $link,
-                    'destino'=>$orden . 'destino' . $link, 'compania'=>$orden . 'compania' . $link,
-                    'salida'=>$orden . 'salida' . $link, 'asientos'=>$orden . 'asientos' . $link,
-                    'precio'=>$orden . 'precio' . $link];
+        $link='';
+        foreach ($vuelos[0] as $key => $value) {
+            $link .= '&' . $key . '=' . old($key);
+        }
+        $link = e($link);
+        $titulos= [];
+        foreach ($vuelos[0] as $key => $value) {
+            $titulos[$key] = '/?orden=' . $key . $link;
+        }
     @endphp
     <form action="/?orden={{old('orden')}}{!!$link!!}" method="get" class=" flex flex-wrap gap-2">
         @foreach (array_keys($titulos)  as $titulo)
@@ -26,43 +26,13 @@
 
     @foreach ($vuelos as $vuelo)
     <tr class="whitespace-nowrap">
-
+        @foreach ($vuelo as $campo)
         <td class="px-6 py-4">
             <div class="text-sm text-gray-900">
-                {{ $vuelo->codigo }}
+                {{ $campo}}
             </div>
         </td>
-        <td class="px-6 py-4">
-            <div class="text-sm text-gray-900">
-                {{ $vuelo->origen }}
-            </div>
-        </td>
-        <td class="px-6 py-4">
-            <div class="text-sm text-gray-900">
-                {{ $vuelo->destino }}
-            </div>
-        </td>
-        <td class="px-6 py-4">
-            <div class="text-sm text-gray-900">
-                {{ $vuelo->compania }}
-            </div>
-        </td>
-        <td class="px-6 py-4">
-            <div class="text-sm text-gray-900">
-                {{ $vuelo->salida }}
-            </div>
-        </td>
-        <td class="px-6 py-4">
-            <div class="text-sm text-gray-900">
-                {{ $vuelo->asientos }}
-            </div>
-        </td>
-        <td class="px-6 py-4">
-            <div class="text-sm text-gray-900">
-                {{ $vuelo->precio }}
-            </div>
-        </td>
-
+        @endforeach
     </tr>
     @endforeach
     </x-tabla>
