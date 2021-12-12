@@ -20,6 +20,7 @@ class VuelosController extends Controller
 
         $vuelos->orderBy($orden);
 
+        //borrar reescribir sin la funcion a que no funciona para todos los casos
         function buscar(&$var, $nombre, $prefijo, &$vuelos)
         {
             if(($var = request()->query($nombre)) !== null){
