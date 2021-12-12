@@ -6,14 +6,16 @@
         $orden= '/?orden=';
 
         $titulos= ['codigo'=>$orden . 'codigo' . $link, 'origen'=>$orden . 'origen' . $link,
-        'destino'=>$orden . 'destino' . $link, 'compania'=>$orden . 'compania' . $link,
-        'salida'=>$orden . 'salida' . $link, 'asientos'=>$orden . 'asientos' . $link,
-        'precio'=>$orden . 'precio' . $link];
+                    'destino'=>$orden . 'destino' . $link, 'compania'=>$orden . 'compania' . $link,
+                    'salida'=>$orden . 'salida' . $link, 'asientos'=>$orden . 'asientos' . $link,
+                    'precio'=>$orden . 'precio' . $link];
     @endphp
     <form action="/?orden={{old('orden')}}{!!$link!!}" method="get" class=" flex flex-wrap gap-2">
         @foreach (array_keys($titulos)  as $titulo)
-            <label for="{{$titulo}}">{{$titulo}}</label>
-            <input type="text" name="{{$titulo}}" class="border">
+            <div>
+                <label for="{{$titulo}}">{{$titulo}}</label>
+                <input type="text" name="{{$titulo}}" class="border">
+            </div>
         @endforeach
         <input type="submit" value="buscar">
     </form>
